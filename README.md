@@ -1,48 +1,62 @@
-# JavaScript-Programa3
-Tercer programa realizado en lenguaje JavaScript
+# PRACTICE TASK - CONTAINERS AND SERVERLESS
+# PART 1: CREATE AT LEAST 5 DOCKERS PROJECTS – 5 PROGRAMMING LANGUAGES
+In this repository we create a file called Index.html which is a program in JavaScript language using the Visual Studio Code source code editor
+# PART 2: ONCE THE FILE IS CREATED, CREATE A DOCKER IMAGE
+### STEPS:
+#### Step 1: Create a Dockerfile
+1. In the same folder as the project, create a file called Dockerfile (without extension).
+2. Add the following content to the Dockerfile:
+   
+FROM  node:14
 
-PASO 1: Creacion del Dockerfile
-Utilizaremos nginx como el servidor para servir el archivo index.html.
+WORKDIR /usr/src/app
 
-# Usa una imagen de nginx como base
-FROM nginx:alpine
+COPY . .
 
-# Copia el archivo index.html al directorio predeterminado de nginx
-COPY index.html /usr/share/nginx/html/index.html
+CMD ["node", "app.js"]
 
-# Expone el puerto 80 para acceder a la aplicación
-EXPOSE 80
 
-# Ejecuta nginx en modo "foreground" para mantener el contenedor activo
-CMD ["nginx", "-g", "daemon off;"]
+#### Step 2: Build the Docker Image
+1. Open the terminal in Visual Studio Code or in the command line.
+2. Navigate to your project folder.
+3. Run the following command to build the Docker image:
+   
+docker build -t hola-mundo-js .
 
-Este Dockerfile hace lo siguiente:
+#### Step 3: Run the Container
+1. Once the image has been built successfully, run the following command to start the container:
+   
+docker run hola-mundo-js
 
-Usa nginx:alpine, una versión ligera de nginx.
-Copia tu archivo index.html al directorio donde nginx espera encontrar la página predeterminada (/usr/share/nginx/html/).
-Expone el puerto 80 para permitir acceso externo.
-Ejecuta nginx en primer plano (daemon off) para que el contenedor continúe ejecutándose.
+# PART 3: PUSHING CHANGES TO GITHUB AND DOCKER HUB
+## To push to github:
+Open a terminal in your project folder and run the following commands:
+1. Git init
+2. Git add .
+3. Git commit -m “feat:”
+4. Create a repository on Github
+5. Add the remote repository and upload the project with the following command lines:
+   
+git remote add origin <REPOSITORY_URL>
 
-Paso 2: Construir y Ejecutar la Imagen Docker
-Abre una terminal en la carpeta del proyecto y ejecuta el siguiente comando para construir la imagen Docker:
-docker build -t hola-mundo-html .
+git branch -M main
 
-Una vez construida la imagen, puedes correr el contenedor y verificar el resultado:
+git push -u origin main
 
-docker run -p 8080:80 hola-mundo-html
-
-Abre un navegador y visita http://localhost:8080. Deberías ver la página con el mensaje HOLA MUNDO y recibir la alerta.
-
-## Subir la Imagen Docker a Docker Hub
-Inicia sesión en Docker Hub desde la terminal (si aún no lo has hecho):
+## To upload the image to Docker Hub:
+1. Log in to Docker Hub from the terminal with the following command line:
+   
 docker login
 
-Etiqueta la imagen para Docker Hub, utilizando tu nombre de usuario de Docker Hub:
-docker tag hola-mundo-html <TU_USUARIO_DOCKER>/hola-mundo-html
-Reemplaza <TU_USUARIO_DOCKER> con tu nombre de usuario en Docker Hub.
+3. Tag the image with the username and the name of the Docker Hub repository.
+   
+docker tag hola-mundo-js <username>/ hola-mundo-js
+   
+5. Push the image to Docker Hub:
+   
+docker push <username>/ hola-mundo-js
 
-Sube la imagen a Docker Hub:
-docker push <TU_USUARIO_DOCKER>/hola-mundo-html
+
 
 
 
