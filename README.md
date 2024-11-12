@@ -7,13 +7,13 @@ In this repository we create a file called Index.html which is a program in Java
 1. In the same folder as the project, create a file called Dockerfile (without extension).
 2. Add the following content to the Dockerfile:
    
-FROM  node:14
+FROM nginx:alpine
 
-WORKDIR /usr/src/app
+COPY index.html /usr/share/nginx/html/index.html
 
-COPY . .
+EXPOSE 80
 
-CMD ["node", "app.js"]
+CMD ["nginx", "-g", "daemon off;"]
 
 
 #### Step 2: Build the Docker Image
@@ -21,12 +21,12 @@ CMD ["node", "app.js"]
 2. Navigate to your project folder.
 3. Run the following command to build the Docker image:
    
-docker build -t hola-mundo-js .
+docker build -t hola-mundo-html .
 
 #### Step 3: Run the Container
 1. Once the image has been built successfully, run the following command to start the container:
    
-docker run hola-mundo-js
+docker run hola-mundo-html
 
 # PART 3: PUSHING CHANGES TO GITHUB AND DOCKER HUB
 ## To push to github:
@@ -50,11 +50,11 @@ docker login
 
 3. Tag the image with the username and the name of the Docker Hub repository.
    
-docker tag hola-mundo-js <username>/ hola-mundo-js
+docker tag hola-mundo-js <username>/ hola-mundo-html
    
 5. Push the image to Docker Hub:
    
-docker push <username>/ hola-mundo-js
+docker push <username>/ hola-mundo-html
 
 
 
